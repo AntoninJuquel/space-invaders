@@ -42,18 +42,18 @@ namespace Entities
                     entity.transform.position = point;
                     _transform.position = point;
                     entity.TakeDamage(lives);
-                    TakeDamage(lives);
                     break;
                 case Bunker _:
                     _transform.position = point;
-                    TakeDamage(lives);
                     break;
             }
+
+            TakeDamage(lives);
         }
 
-        public void Setup(int lives, Sprite sprite, Vector2 direction, float speed, Color color, LayerMask layerToHit, string myLayer)
+        public void Setup(int livesAmount, Sprite sprite, Vector2 direction, float speed, Color color, LayerMask layerToHit, string myLayer)
         {
-            base.Setup(lives, sprite, color);
+            base.Setup(livesAmount, sprite, color);
             _transform = transform;
             _direction = direction;
             _speed = speed;

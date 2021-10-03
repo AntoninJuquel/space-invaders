@@ -1080,7 +1080,7 @@ GameObject:
   - component: {fileID: 1952998835}
   - component: {fileID: 1952998834}
   m_Layer: 0
-  m_Name: InvadersGrid
+  m_Name: Invaders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1101,6 +1101,7 @@ MonoBehaviour:
   endScreen: {fileID: 587922436}
   waveText: {fileID: 749674759}
   scoreText: {fileID: 848077087}
+  endScoreText: {fileID: 147152259}
   endRecap: {fileID: 1373543050}
   waves:
   - rows:
@@ -1108,22 +1109,27 @@ MonoBehaviour:
       - {fileID: 21300000, guid: b5f20663b636d4b4eb010e7fb8012499, type: 3}
       - {fileID: 21300000, guid: 695deb1fbb284dd46be3ecd6ad6b2c49, type: 3}
       lives: 3
+      points: 30
     - sprites:
       - {fileID: 21300000, guid: faa33742ca0e31347b439b55fb7cecfd, type: 3}
       - {fileID: 21300000, guid: f71a1796fdbee8e49b6f314e661ba7e1, type: 3}
       lives: 2
+      points: 20
     - sprites:
       - {fileID: 21300000, guid: faa33742ca0e31347b439b55fb7cecfd, type: 3}
       - {fileID: 21300000, guid: f71a1796fdbee8e49b6f314e661ba7e1, type: 3}
       lives: 2
+      points: 20
     - sprites:
       - {fileID: 21300000, guid: c8e61345d3987184b973a87b6d24e87a, type: 3}
       - {fileID: 21300000, guid: 62bd310435a5d0c468ae8052f0a3e83c, type: 3}
       lives: 1
+      points: 10
     - sprites:
       - {fileID: 21300000, guid: c8e61345d3987184b973a87b6d24e87a, type: 3}
       - {fileID: 21300000, guid: 62bd310435a5d0c468ae8052f0a3e83c, type: 3}
       lives: 1
+      points: 10
     amountPerRow: 9
     step: {x: 1, y: 0.5}
     space: {x: 2, y: 2}
@@ -1151,21 +1157,24 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
-    missileAttackRate: 100
+    shotRate: 0.5
     stunTime: 0.25
   - rows:
     - sprites:
       - {fileID: 21300000, guid: c8e61345d3987184b973a87b6d24e87a, type: 3}
       - {fileID: 21300000, guid: 62bd310435a5d0c468ae8052f0a3e83c, type: 3}
       lives: 1
+      points: 10
     - sprites:
       - {fileID: 21300000, guid: c8e61345d3987184b973a87b6d24e87a, type: 3}
       - {fileID: 21300000, guid: 62bd310435a5d0c468ae8052f0a3e83c, type: 3}
       lives: 1
+      points: 10
     - sprites:
       - {fileID: 21300000, guid: c8e61345d3987184b973a87b6d24e87a, type: 3}
       - {fileID: 21300000, guid: 62bd310435a5d0c468ae8052f0a3e83c, type: 3}
       lives: 1
+      points: 10
     amountPerRow: 5
     step: {x: 1, y: 1}
     space: {x: 2, y: 2}
@@ -1193,9 +1202,9 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
-    missileAttackRate: 100
+    shotRate: 0.5
     stunTime: 0.25
-  invaderPrefab: {fileID: 660466087775718503, guid: 5c4168cc0734ef345ac2192a5c73e002, type: 3}
+  invader: {fileID: -8256801328168621636, guid: 5c4168cc0734ef345ac2192a5c73e002, type: 3}
 --- !u!4 &1952998835
 Transform:
   m_ObjectHideFlags: 0
@@ -1253,8 +1262,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bdf2032e81024747810656db9ec5f86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 95233201572881715, guid: 115e9a4c5757a9b498e9b4e11a5c00ab, type: 3}
+  invaders: {fileID: 1952998834}
   pauseText: {fileID: 749674759}
-  playerPrefab: {fileID: 4538711051293184072, guid: 115e9a4c5757a9b498e9b4e11a5c00ab, type: 3}
   bunkerPrefab: {fileID: 4538711051293184072, guid: 2a9f12a5bb0e470459f6c26f77a929a9, type: 3}
 --- !u!1 &2036109034
 GameObject:

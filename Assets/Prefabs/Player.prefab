@@ -169,6 +169,9 @@ MonoBehaviour:
   layerToHit:
     serializedVersion: 2
     m_Bits: 136
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
   livesText: {fileID: 97221117138858231}
 --- !u!1 &4963179547244691102
 GameObject:

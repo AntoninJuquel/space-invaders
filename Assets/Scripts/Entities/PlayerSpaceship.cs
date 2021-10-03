@@ -6,9 +6,10 @@ namespace Entities
 {
     public class PlayerSpaceship : Spaceship
     {
+        [SerializeField] private LayerMask enemyLayer;
         [SerializeField] private TextMeshProUGUI livesText;
         private float _horizontalInput;
-
+      
         private void Start()
         {
             GetComponentInChildren<Canvas>().worldCamera = Camera.main;
@@ -19,13 +20,18 @@ namespace Entities
             _horizontalInput = Input.GetAxisRaw("Horizontal");
             if (Input.GetKeyDown(KeyCode.Space))
                 Shoot(Vector2.up, "Ally");
+
+            if (Physics2D.Linecast(transform.position + Vector3.left + Vector3.down * .25f, transform.position + Vector3.right + Vector3.down * .25f, enemyLayer))
+            {
+                GameManager.GameOver();
+            }
         }
 
         private void FixedUpdate()
         {
             Move(Vector2.right * _horizontalInput);
         }
-        
+
         private void Move(Vector3 direction)
         {
             transform.position += direction.normalized * (speed * Time.fixedDeltaTime);
@@ -35,6 +41,7 @@ namespace Entities
         {
             transform.position = new Vector3(15, 2);
             Sr.enabled = Box.enabled = this.enabled = false;
+            if (lives <= 0) yield break;
             yield return new WaitForSeconds(1f);
             Sr.enabled = Box.enabled = this.enabled = true;
         }
@@ -44,6 +51,11 @@ namespace Entities
             base.TakeDamage(amount);
             livesText.text = string.Concat("<sprite=0> ", lives);
             StartCoroutine(RespawnRoutine());
+        }
+
+        public override void OnDie()
+        {
+            GameManager.GameOver();
         }
     }
 }

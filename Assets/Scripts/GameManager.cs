@@ -1,17 +1,19 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using Entities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private PlayerSpaceship player;
+    [SerializeField] private Invaders invaders;
     [SerializeField] private TextMeshProUGUI pauseText;
-    [SerializeField] private GameObject playerPrefab, bunkerPrefab;
+    [SerializeField] private GameObject bunkerPrefab;
     private Camera _camera;
     private Bounds _gameBounds;
     public static State GameState;
+    public static event Action OnGameOver;
 
     private void Awake()
     {
@@ -27,6 +29,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
         switch (GameState)
         {
             case State.Paused:
@@ -51,6 +55,7 @@ public class GameManager : MonoBehaviour
             case State.GameOver:
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
                 {
+                    GameState = State.Playing;
                     SceneManager.LoadScene("GameScene");
                 }
 
@@ -63,7 +68,7 @@ public class GameManager : MonoBehaviour
     private void SpawnPlayer()
     {
         var spawnPos = new Vector2(_gameBounds.size.x / 2, _gameBounds.size.y / 15);
-        Instantiate(playerPrefab, spawnPos, Quaternion.identity);
+        player = Instantiate(player, spawnPos, Quaternion.identity);
     }
 
     private void SpawnBunkers(int amount)
@@ -76,6 +81,12 @@ public class GameManager : MonoBehaviour
             var spawnPos = new Vector2(baseX + (space * i), _gameBounds.size.y / 6);
             Instantiate(bunkerPrefab, spawnPos, Quaternion.identity);
         }
+    }
+
+    public static void GameOver()
+    {
+        GameState = State.GameOver;
+        OnGameOver?.Invoke();
     }
 
     public enum State
